@@ -18,10 +18,10 @@ export default function NewUser() {
       text: "We are processing your request",
       showConfirmButton: false,
     });
-    await fetch("/api/auth/register", {
+    await fetch("/api/user/add", {
       method: "POST",
       body: JSON.stringify({
-        fullname: e.currentTarget.fullname.value,
+        username: e.currentTarget.username.value,
         email: e.currentTarget.email.value,
         password: e.currentTarget.password.value,
       }),
@@ -37,7 +37,7 @@ export default function NewUser() {
             showConfirmButton: false,
             timer: 1500,
           });
-          replace("/login");
+          replace("/");
         } else {
           withReactContent(Swal).fire({
             icon: "error",
@@ -63,15 +63,15 @@ export default function NewUser() {
             >
               <div>
                 <label
-                  htmlFor="fullname"
+                  htmlFor="username"
                   className="block mb-2 text-sm font-medium text-white"
                 >
                   Your Name
                 </label>
                 <input
                   type="text"
-                  name="fullname"
-                  id="fullname"
+                  name="username"
+                  id="username"
                   className=" border rounded-lg block w-full p-2.5 bg-gray-700 border-gray-600 placeholder-gray-400 text-white focus:ring-blue-500 focus:border-blue-500"
                   placeholder="Your name"
                   required
@@ -119,7 +119,7 @@ export default function NewUser() {
               <p className="text-sm font-normal text-gray-400">
                 Already have an account?{" "}
                 <Link
-                  href="/login"
+                  href="/"
                   className="font-semibold text-primary-600 hover:underline text-primary-500"
                 >
                   Sign in
