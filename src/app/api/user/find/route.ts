@@ -1,7 +1,7 @@
 import { supabaseDB } from "@/lib/supabase/init";
 import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 
 export async function POST(request: NextRequest) {
   const req = await request.json();

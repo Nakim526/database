@@ -1,13 +1,11 @@
 "use client";
-import { UserProps } from "@/lib/interface";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
-import Link from "next/link";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 export default function Home() {
-  const { push, replace } = useRouter();
+  const { push } = useRouter();
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -59,7 +57,7 @@ export default function Home() {
           <div className="w-full bg-gray-800 border border-gray-700 rounded-lg shadow md:mt-0 xl:p-0">
             <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
               <h1 className="text-xl! font-bold leading-tight tracking-tight text-white md:text-2xl!">
-                Find your data
+                Sign in to your account
               </h1>
               <form
                 className="space-y-4 md:space-y-6"
@@ -89,7 +87,7 @@ export default function Home() {
                     Password
                   </label>
                   <input
-                    type="password"
+                    type="text"
                     name="password"
                     id="password"
                     placeholder="••••••••"
@@ -108,7 +106,7 @@ export default function Home() {
                       Loading
                     </div>
                   ) : (
-                    "Cari"
+                    "Sign in"
                   )}
                 </button>
               </form>

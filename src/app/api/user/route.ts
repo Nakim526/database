@@ -1,13 +1,25 @@
 import { supabaseDB } from "@/lib/supabase/init";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
+import bcrypt from "bcrypt";
 
-export async function GET() {
+export async function POST(request: NextRequest) {
+  const req = await request.json();
   const { data, error } = await supabaseDB
     .from("users")
     .select("*")
-    .order("name", { ascending: true });
+    .eq("username", req.username)
+    .single();
   if (error) {
-    return NextResponse.json({ status: 500, message: error.message });
+    return NextResponse.json({ status: 500, message: "Data Tidak Ditemukan" });
   }
-  return NextResponse.json({ status: 200, message: "Success", data: data });
+
+  const isMatch = await bcrypt.compare(req.password, data.password);
+  if (!isMatch) {
+    return NextResponse.json({ status: 404, message: "Password Salah" });
+  }
+  return NextResponse.json({
+    status: 200,
+    message: "Success",
+    data: data,
+  });
 }
